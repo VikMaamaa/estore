@@ -10,11 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+    use SoftDeletes;
 
     /**
      * @var string
@@ -45,5 +47,17 @@ class Product extends Model implements HasMedia
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function productvariations(): HasMany
+    {
+        return $this->hasMany(ProductVariation::class, 'shop_product_id');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('product_images')
+            ->useDisk('public')
+            ->singleFile();
     }
 }
