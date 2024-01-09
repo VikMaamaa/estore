@@ -9,6 +9,20 @@
         },
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "Local Environment"
+        },
+        {
+            "url": "https://staging.example.com",
+            "description": "Staging Environment"
+        },
+        {
+            "url": "https://api.example.com",
+            "description": "Production Environment"
+        }
+    ],
     "paths": {
         "/api/login": {
             "post": {

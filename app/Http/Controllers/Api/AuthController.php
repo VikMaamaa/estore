@@ -17,10 +17,22 @@ use App\Traits\ApiResponseTrait;
  *     @OA\Contact(
  *         email="maaamaavictor@gmail.com",
  *         name="Victor Maamaa"
- *     ),
- *
+ *     )
+ * ),
+ * @OA\Server(
+ *     description="Local Environment",
+ *     url="http://127.0.0.1:8000/api"
+ * ),
+ * @OA\Server(
+ *     description="Staging Environment",
+ *     url="https://staging.example.com"
+ * ),
+ * @OA\Server(
+ *     description="Production Environment",
+ *     url="https://api.example.com"
  * )
  */
+
 class AuthController extends Controller
 {
     use ApiResponseTrait;
