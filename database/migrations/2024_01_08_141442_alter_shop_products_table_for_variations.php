@@ -14,7 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::table('shop_products', function (Blueprint $table) {
-            $table->dropColumn(['requires_shipping', 'weight_unit', 'height_unit', 'width_unit', 'depth_unit', 'volume_unit']);
+            $table->dropColumn([
+                'weight_unit',
+                'weight_value',
+                'height_unit',
+                'height_value',
+                'width_unit',
+                'width_value',
+                'depth_unit',
+                'depth_value',
+                'volume_unit',
+                'volume_value',
+
+            ]);
+
             $table->boolean('has_variations')->default(false);
         });
     }
@@ -27,12 +40,16 @@ return new class extends Migration
     public function down()
     {
         Schema::table('shop_products', function (Blueprint $table) {
-            $table->boolean('requires_shipping')->default(false);
             $table->string('weight_unit')->default('kg');
+            $table->decimal('weight_value', 10, 2)->nullable()->default(0.00)->unsigned();
             $table->string('height_unit')->default('cm');
+            $table->decimal('height_value', 10, 2)->nullable()->default(0.00)->unsigned();
             $table->string('width_unit')->default('cm');
+            $table->decimal('width_value', 10, 2)->nullable()->default(0.00)->unsigned();
             $table->string('depth_unit')->default('cm');
+            $table->decimal('depth_value', 10, 2)->nullable()->default(0.00)->unsigned();
             $table->string('volume_unit')->default('l');
+            $table->decimal('volume_value', 10, 2)->nullable()->default(0.00)->unsigned();
             $table->dropColumn('has_variations');
         });
     }
